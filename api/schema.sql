@@ -8,9 +8,9 @@
 -----------------------------------------------------------------------------
 
 DROP TABLE IF EXISTS reservierungen;
-DROP TABLE IF EXISTS tische;
+DROP TABLE IF EXISTS Tisch;
 
-CREATE TABLE tische(
+CREATE TABLE Tisch(
     tischnummer              INTEGER NOT NULL UNIQUE
 ,   anzahlPlaetze   INTEGER 
 ,   PRIMARY KEY (tischnummer)
@@ -23,10 +23,10 @@ CREATE TABLE reservierungen(
 ,   pin         INTEGER
 ,   storniert   BOOLEAN NOT NULL CHECK (storniert IN ('True', 'False')) -- SQLite unterstützt keine Boolschen Werte, aber
 ,   PRIMARY KEY (reservierungsnummer)                                   -- dieser Workaround lässt nur zwei Einträge zu.
-,   FOREIGN KEY (tischnummer) REFERENCES tische(tischnummer)
+,   FOREIGN KEY (tischnummer) REFERENCES Tisch(tischnummer)
 );
 
-INSERT INTO tische (tischnummer, anzahlPlaetze) VALUES
+INSERT INTO Tisch (tischnummer, anzahlPlaetze) VALUES
     (1, 4)
 ,   (2, 6)
 ,   (3, 6)

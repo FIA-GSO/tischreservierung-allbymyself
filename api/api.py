@@ -1,6 +1,6 @@
 from flask import Flask
 from models import db
-from controller import app as controller_app
+from controller import create_controller_blueprint
 
 def create_app():
     app = Flask(__name__)
@@ -11,7 +11,7 @@ def create_app():
 
     with app.app_context():
         db.create_all()
-        app.register_blueprint(controller_app)
+        app.register_blueprint(create_controller_blueprint(database_uri=app.config['SQLALCHEMY_DATABASE_URI']))
 
     return app
 
